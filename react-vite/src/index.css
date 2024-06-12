@@ -1,1 +1,23 @@
 /* TODO: Add sitewide styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+:root {
+    --red: #ff0037;
+    --red-tp: #ff003733;
+    --blue: #00f2ff;
+    --navy: #010118;
+}
+body {
+    background-color: var(--navy);
+    background-image: url('./dotted-bg.svg');
+    color:white;
+    font-family: sans-serif;
+}
+#root {
+    align-items: flex-start;
+    display: flex;
+    justify-content: flex-start;
+}

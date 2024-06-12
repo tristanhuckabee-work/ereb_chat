@@ -1,0 +1,22 @@
+.menu-svg {
+    cursor: pointer;
+    fill: var(--red);
+    font-weight: 800;
+    stroke:#00000000;
+    transition: all 0.3s linear;
+}
+.menu-svg:hover {
+    fill: #00000000;
+    stroke: var(--red);
+}
+.menu-svg-blue {
+    cursor: pointer;
+    fill: var(--blue);
+    font-weight: 800;
+    stroke:#00000000;
+    transition: all 0.3s linear;
+}
+.menu-svg-blue:hover {
+    fill: #00000000;
+    stroke: var(--blue);
+}

@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { thunkSignup } from "../../redux/session";
 import "./SignupForm.css";
+import MenuSVG from '../MenuSVG/MenuSVG'
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -39,10 +40,10 @@ function SignupFormModal() {
   };
 
   return (
-    <>
-      <h1>Sign Up</h1>
-      {errors.server && <p>{errors.server}</p>}
+    <div className='modal-form register'>
+      {errors.server && <p className='errors'>{errors.server}</p>}
       <form onSubmit={handleSubmit}>
+        {/* <h1>Sign Up</h1> */}
         <label>
           Email
           <input
@@ -52,7 +53,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className='errors'>{errors.email}</p>}
         <label>
           Username
           <input
@@ -62,7 +63,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && <p>{errors.username}</p>}
+        {errors.username && <p className='errors'>{errors.username}</p>}
         <label>
           Password
           <input
@@ -72,7 +73,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
+        {errors.password && <p className='errors'>{errors.password}</p>}
         <label>
           Confirm Password
           <input
@@ -82,10 +83,14 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.confirmPassword && <p>{errors.confirmPassword}</p>}
-        <button type="submit">Sign Up</button>
+        {errors.confirmPassword && <p className='errors'>{errors.confirmPassword}</p>}
+        <div className='form-actions'>
+          <MenuSVG text='SUBMIT' onClick={handleSubmit}/>
+          <MenuSVG text='CANCEL' onClick={closeModal}/>
+        </div>
+        {/* <button type="submit">Sign Up</button> */}
       </form>
-    </>
+    </div>
   );
 }
 

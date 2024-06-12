@@ -1,3 +1,38 @@
 .profile-dropdown {
   position: absolute;
 }
+#splash-nav {
+  align-items: center;
+  background-color: var(--red-tp);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10vw;
+}
+#splash-actions {
+  align-items: center;
+  display: flex;
+  /* gap: 10px; */
+  justify-content: space-between;
+  padding: 5px 10px;
+  width: fit-content;
+}
+/* #nav-login, #nav-register {
+  background-color: #333;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  padding: 0 10px;
+  width: 10vw;
+} */
+
+#user-nav {
+  align-items: center;
+  background-color: var(--red-tp);
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  padding: 10px 10px 20px 10px;
+  width: fit-content
+}

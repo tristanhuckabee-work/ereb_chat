@@ -28,6 +28,8 @@ export function ModalProvider({ children }) {
     closeModal // function to close the modal
   };
 
+  console.log(contextValue)
+
   return (
     <>
       <ModalContext.Provider value={contextValue}>

@@ -3,6 +3,7 @@ import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import MenuSVG from "../MenuSVG/MenuSVG";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -14,24 +15,28 @@ function LoginFormModal() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
-    );
-
-    if (serverResponse) {
-      setErrors(serverResponse);
+    let res = await dispatch(thunkLogin({ email, password }));
+    if (res) {
+      setErrors(res);
     } else {
       closeModal();
     }
   };
+  const demoSubmit = async (e) => {
+    e.preventDefault();
+
+    let res = await dispatch(thunkLogin({ email:'demo@aa.io', password:'password' }));
+    if (res) {
+      setErrors(res);
+    } else {
+      closeModal();
+    }
+  }
 
   return (
-    <>
-      <h1>Log In</h1>
+    <div className='modal-form signin'>
       <form onSubmit={handleSubmit}>
+        <h1>Log In</h1>
         <label>
           Email
           <input
@@ -41,7 +46,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+        {errors.email && <p className='errors'>{errors.email}</p>}
         <label>
           Password
           <input
@@ -51,10 +56,15 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        {errors.password && <p className='errors'>{errors.password}</p>}
+        <div className='form-actions'>
+          <MenuSVG text='SUBMIT' onClick={handleSubmit}/>
+          <MenuSVG text='CANCEL' onClick={closeModal}/>
+        </div>
+        <MenuSVG text='DEMO LOGIN' onClick={demoSubmit}/>
+        {/* <button type="submit">Log In</button> */}
       </form>
-    </>
+    </div>
   );
 }
 

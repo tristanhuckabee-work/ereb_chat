@@ -4,25 +4,35 @@ from sqlalchemy.sql import text
 
 # Adds a demo user, you can add other users here if you want
 def seed_users():
-    demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+    user1 = User(username='yung-demo', email='demo@user.io', password='password', profile_picture_url="https://res.cloudinary.com/dzsgront4/image/upload/v1701235494/pexels-jacek-jan-skorupski_ljira3.jpg")
+    user2 = User(username='city-pop-phantom', email='marnie@user.io', password='password', profile_picture_url="https://res.cloudinary.com/dzsgront4/image/upload/v1700889029/marnie_z9wlbg.png")
+    user3 = User(username='bigBobby32', email='robertwilliams@user.io', password='password', profile_picture_url="https://res.cloudinary.com/dzsgront4/image/upload/v1701235496/pexels-vadim-birsan_ahyinz.jpg")
+    
+    # user4 = User(username='', email='', password='password', profile_picture_url="")
+    # user5 = User(username='', email='', password='password', profile_picture_url="")
+    # user6 = User(username='', email='', password='password', profile_picture_url="")
+    # user7 = User(username='', email='', password='password', profile_picture_url="")
+    # user8 = User(username='', email='', password='password', profile_picture_url="")
+    # user9 = User(username='', email='', password='password', profile_picture_url="")
+    # user10 = User(username='', email='', password='password', profile_picture_url="")
+    # user11 = User(username='', email='', password='password', profile_picture_url="")
+    # user12 = User(username='', email='', password='password', profile_picture_url="")
 
-    db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+
+    db.session.add(user1)
+    db.session.add(user2)
+    db.session.add(user3)
+    # db.session.add(user4)
+    # db.session.add(user5)
+    # db.session.add(user6)
+    # db.session.add(user7)
+    # db.session.add(user8)
+    # db.session.add(user9)
+    # db.session.add(user10)
+    # db.session.add(user11)
+    # db.session.add(user12)
     db.session.commit()
 
-
-# Uses a raw SQL query to TRUNCATE or DELETE the users table. SQLAlchemy doesn't
-# have a built in function to do this. With postgres in production TRUNCATE
-# removes all the data from the table, and RESET IDENTITY resets the auto
-# incrementing primary key, CASCADE deletes any dependent entities.  With
-# sqlite3 in development you need to instead use DELETE to remove all data and
-# it will reset the primary keys for you as well.
 def undo_users():
     if environment == "production":
         db.session.execute(f"TRUNCATE table {SCHEMA}.users RESTART IDENTITY CASCADE;")

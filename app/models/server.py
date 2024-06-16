@@ -1,8 +1,9 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from .member import members
 
 
-class Server(db.Model, UserMixin):
+class Server(db.Model,):
     __tablename__ = 'servers'
 
     if environment == "production":
@@ -16,22 +17,19 @@ class Server(db.Model, UserMixin):
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
     owner = db.relationship('User', back_populates='servers')
-    users = db.relationship('User', back_populates='servers', secondary='members')
+    users = db.relationship('User', back_populates='servers', secondary=members)
     channels = db.relationship('Channel', back_populates='server', cascade='all, delete-orphan')
 
-    @property
-    def invite_url(self):
-        return self.invite_url
-    @invite_url.setter
-    def invite_url(self):
+    
+    def generate_invite_url(self):
         ord_str = [ord(char) for char in f'{self.name}{str(self.id)}']
         hex_str = ''.join([hex(char)[2:] for char in ord_str])
-        self.invite_url = f'https://www.ereb-chat.onrender.com/api/servers/{bin_str}/join'
-
+        return f'https://www.ereb-chat.onrender.com/servers/{hex_str[-50:]}/join'
+    
     def to_dict(self):
         return {
             'id': self.id,
             'name': self.name,
-            'created_at': self.created_at,
-            'invite_url': self.invite_url
+            'invite_url': self.invite_url,
+            'created_at': self.created_at
         }

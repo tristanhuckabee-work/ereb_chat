@@ -25,7 +25,7 @@ function LoginFormModal() {
   const demoSubmit = async (e) => {
     e.preventDefault();
 
-    let res = await dispatch(thunkLogin({ email:'demo@aa.io', password:'password' }));
+    let res = await dispatch(thunkLogin({ email:'demo@user.io', password:'password' }));
     if (res) {
       setErrors(res);
     } else {
@@ -36,7 +36,7 @@ function LoginFormModal() {
   return (
     <div className='modal-form signin'>
       <form onSubmit={handleSubmit}>
-        <h1>Log In</h1>
+        {/* <h1>Log In</h1> */}
         <label>
           Email
           <input

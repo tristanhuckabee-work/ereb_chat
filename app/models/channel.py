@@ -2,8 +2,8 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
 
 
-class Channel (db.Model, UserMixin):
-    __tablename__ = 'servers'
+class Channel (db.Model):
+    __tablename__ = 'channels'
 
     if environment == "production":
         __table_args__ = {'schema': SCHEMA}

@@ -1,0 +1,5 @@
+/* .server-menu {} */
+.server-menu:hover {
+    cursor: pointer;
+    color: var(--red);
+}

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
-from flask_login import login_required
-from app.models import User
+from flask_login import current_user, login_required
+from app.models import User, Server
 
 user_routes = Blueprint('users', __name__)
 
@@ -23,3 +23,13 @@ def user(id):
     """
     user = User.query.get(id)
     return user.to_dict()
+
+@user_routes.route('/my_servers')
+@login_required
+def user_servers():
+    """
+    Query for servers belonging to a User by User_id and return a list of server dictionaries
+    """
+    servers = Server.query.filter(Server.owner_id == current_user.id).all()
+    return [server.to_dict() for server in servers]
+

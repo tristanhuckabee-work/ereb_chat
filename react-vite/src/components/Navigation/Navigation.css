@@ -35,19 +35,28 @@
   flex-direction: column;
   height: 100vh;
   justify-content: space-between;
-  padding: 10px 10px 20px 10px;
+  padding: 10px 0 20px 0;
   width: fit-content
 }
 #server-list {
-  background-color: blue;
-  height: 70vh;
-  align-items: center;
+  align-items: flex-start;
+  background-color: #00000055;
   display: flex;
   flex-direction: column;
   gap: 10px;
+  height: 80vh;
   justify-content: flex-start;
+  margin: 10px 0;
+  overflow-y: scroll;
+  padding: 10px;
 }
-#server-list * {
-  position: relative;
-  left: 75%;
+#server-list::-webkit-scrollbar {
+  width: 5px;
+}
+#server-list::-webkit-scrollbar-thumb {
+  background-color: var(--red);
+  border-radius: 5px;
+}
+#server-list::-webkit-scrollbar-thumb:hover {
+  cursor: pointer;
 }

@@ -7,6 +7,7 @@ import MenuSVG from "../MenuSVG/MenuSVG";
 import { thunkLogout } from "../../redux/session";
 import { useEffect } from "react";
 import { get_servers } from "../../redux/server";
+import ServerMenu from "../ServerMenu/ServerMenu";
 
 function Navigation() {
   const dispatch = useDispatch()
@@ -14,8 +15,8 @@ function Navigation() {
   const servers = useSelector(state => state?.servers?.servers)
 
   useEffect(() => {
-    dispatch(get_servers('all'))
-  }, [dispatch])
+    dispatch(get_servers('usr', current_user?.id))
+  }, [dispatch, current_user])
 
   const logout = e => {
     e.preventDefault();
@@ -24,28 +25,36 @@ function Navigation() {
   const formatServers = () => {
     let comp = [];
     for (let id in servers) {
-
-      let compName = servers[id]?.name
-      if (compName.length > 10) {
-        compName = compName.slice(0,10) + '...'
-      }
       comp.push(
-        <MenuSVG text={compName} />
+        <ServerMenu server={servers[id]} />
       )
     }
     return comp;
+  }
+  const createServer = e => {
+    e.preventDefault();
+
+    console.log('open modal')
   }
 
   if (current_user) {
     return (
       <nav id='user-nav'>
         <div>
-          <h1>{current_user?.username}</h1>
+          <h1 style={{ 'text-align': 'center' }}>{current_user?.username}</h1>
           <div id='server-list'>
+            {/* <div className='server-menu'>Direct Messages</div> */}
             {formatServers()}
+
           </div>
+          {/* <MenuSVG text='+ New Server' onClick={createServer}/> */}
+          <OpenModalButton
+            buttonText='NEW SERVER'
+            modalComponent={<LoginFormModal />}
+            buttonID='nav-new-server'
+          />
         </div>
-        <MenuSVG text='LOG OUT' onClick={logout}/>
+        <MenuSVG text='LOG OUT' onClick={logout} />
       </nav >
     );
   } else {

@@ -18,12 +18,11 @@ const deleteServer = p => ({ type: DELETE, p });
 // export const create_server = payload => async dispatch => {
 //     return;
 // }
-export const get_servers = (type, resource_id=0) => async dispatch => {
+export const get_servers = (type, resource_id = 0) => async dispatch => {
     let res;
     let action;
 
     if (type == 'all') {
-        console.log('GET ALL SERVERS');
         res = await fetch('/servers');
         action = getAllServer
     } else if (type == 'one') {
@@ -31,13 +30,11 @@ export const get_servers = (type, resource_id=0) => async dispatch => {
         res = await fetch(`/servers/${resource_id}`);
         action = getOneServer
     } else {
-            console.log(`GET ALL SERVER FOR USER ${resource_id}`)
-            res = await fetch(`/users/${resource_id}/servers`);
-            action = getUsrServer
+        res = await fetch(`/users/my_servers`);
+        action = getUsrServer
     }
 
     const data = await res.json();
-
     if (res.ok) {
         dispatch(action(data));
         return data;
@@ -54,7 +51,7 @@ export const get_servers = (type, resource_id=0) => async dispatch => {
 // REDUCER
 export default function reducer(state = {}, action) {
     let newState = {
-        servers: {...state.servers},
+        servers: { ...state.servers },
         current: state.current
     }
 
@@ -62,7 +59,6 @@ export default function reducer(state = {}, action) {
         // case CREATE:
         //     return newState;
         case READ_ALL:
-            console.log('!!!!!!!!!!!!!!!!', action.p)
             action.p.servers.forEach(server => {
                 newState.servers[server.id] = server;
             });
@@ -70,8 +66,11 @@ export default function reducer(state = {}, action) {
         case READ_ONE:
             newState.current = action.payload;
             return newState;
-        // case READ_USR:
-        //     return newState;
+        case READ_USR:
+            action.p.forEach(server => {
+                newState.servers[server.id] = server
+            });
+            return newState;
         // case UPDATE:
         //     return newState;
         // case DELETE:

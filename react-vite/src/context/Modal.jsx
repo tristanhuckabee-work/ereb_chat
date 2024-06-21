@@ -28,7 +28,7 @@ export function ModalProvider({ children }) {
     closeModal // function to close the modal
   };
 
-  console.log(contextValue)
+  // console.log(contextValue)
 
   return (
     <>
